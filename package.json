@@ -1,5 +1,5 @@
 {
-    "name": "preentrega1-backend",
+    "name": "desafio4-backend",
     "version": "0.0.0",
     "description": "",
     "private": true,
@@ -15,7 +15,7 @@
     "author": "",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Benjamin-Paredes-Brain/PreEntrega1-Backend.git"
+        "url": "git+https://github.com/Benjamin-Paredes-Brain/DESAFIO4-BACKEND.git"
     },
     "devDependencies": {
         "@commitlint/cli": "17.7.1",
@@ -32,6 +32,8 @@
     },
     "dependencies": {
         "express": "4.18.2",
-        "express-validator": "7.0.1"
+        "express-handlebars": "7.1.2",
+        "express-validator": "7.0.1",
+        "socket.io": "4.7.2"
     }
 }

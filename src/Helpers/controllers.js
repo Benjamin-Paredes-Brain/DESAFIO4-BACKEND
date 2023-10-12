@@ -1,7 +1,7 @@
 import { readProductsFile } from '../Helpers/readProductsFile.js'
 import { readCart } from '../Helpers/readCart.js'
 
-let productData
+export let productData
 
 readProductsFile()
     .then(data => {
@@ -34,8 +34,8 @@ export const productIdController = (req, res) => {
     productID
         ? res.send({ productID })
         : res
-              .status(404)
-              .json({ error: 'There is no product with the requested id or an invalid parameter was entered.' })
+            .status(404)
+            .json({ error: 'There is no product with the requested id or an invalid parameter was entered.' })
 }
 
 export const productAddController = (req, res) => {
