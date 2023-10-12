@@ -5,6 +5,7 @@ import { Server } from 'socket.io'
 import { router as productsRouter } from './routes/products.router.js'
 import { router as cartsRouter } from './routes/carts.router.js'
 import { router as viewsRouter } from './routes/views.router.js'
+import { productData } from './Helpers/controllers.js'
 
 const app = express()
 
@@ -22,11 +23,29 @@ app.use(productsRouter)
 app.use(viewsRouter)
 
 socketServer.on("connection", socket => {
-    console.log("handshake!")
+    console.log("handshake!");
 
-    socket.on("message", data => {
-        console.log(data)
-    })
-})
+    socket.on("addProduct", data => {
+
+
+        const lastProductId = productData.reduce((maxId, product) => {
+            return product.id > maxId ? product.id : maxId
+        }, -1)
+
+        const newProduct = { title: data.title };
+        newProduct.id = lastProductId + 1
+        productData.push(newProduct)
+        socketServer.emit("updateProducts", productData);
+    });
+
+    socket.on("deleteProduct", data => {
+
+        const pidDelete = data.id
+        const index = productData.findIndex(i => i.id == pidDelete)
+        if(index > -1) { productData.splice(index, 1)}
+        socketServer.emit("updateProducts", productData);
+    });
+});
+
 
 
